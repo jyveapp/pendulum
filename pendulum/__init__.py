@@ -194,10 +194,11 @@ def instance(
             tz = tz.utcoffset(dt).total_seconds() / 3600
 
     transition_rule = POST_TRANSITION
-    if dt.fold is not None:
-        transition_rule = PRE_TRANSITION
-        if dt.fold:
-            transition_rule = POST_TRANSITION
+    if _HAS_FOLD:
+        if dt.fold is not None:
+            transition_rule = PRE_TRANSITION
+            if dt.fold:
+                transition_rule = POST_TRANSITION
 
     return datetime(
         dt.year,
